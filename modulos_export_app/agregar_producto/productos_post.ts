@@ -22,7 +22,7 @@ btn_agregar.addEventListener("click", function(event){
     let color_input = <HTMLInputElement> document.getElementById("color");
     let cantidad_input = <HTMLInputElement> document.getElementById("cantidad");
     let medida_input = <HTMLInputElement> document.getElementById("medida");
-    let costo_input = <HTMLInputElement> document.getElementById("costo");
+    let costo_unitario_input = <HTMLInputElement> document.getElementById("costo_unitario");
     let proveedor_input = <HTMLInputElement> document.getElementById("proveedor");
 
     // obj post
@@ -32,7 +32,7 @@ btn_agregar.addEventListener("click", function(event){
           color: color_input.value,
           cantidad: cantidad_input.value,
           medida: medida_input.value,
-          costo_total: costo_input.value,
+          costo_unitario: costo_unitario_input.value,
           proveedor: proveedor_input.value
     }
    // obj post
@@ -46,7 +46,7 @@ btn_agregar.addEventListener("click", function(event){
   color_input.value = "";
   cantidad_input.value = "";
   medida_input.value = "";
-  costo_input.value = "";
+  costo_unitario_input.value = "";
   proveedor_input.value = "";
   
 })
