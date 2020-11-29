@@ -62,7 +62,7 @@ ipc.on('open_agregar_producto.html', function(event){
     win2.loadFile('agregar_producto.html');
 
     win2.once("ready-to-show", () => {
-        win.show();
+        win2.show();
     })
 
     ipc.on('close-agregar-producto.html', function(event){
@@ -71,6 +71,30 @@ ipc.on('open_agregar_producto.html', function(event){
     })
 })
 // iniciar/cerrar - agregar_productos.html 
+
+// iniciar proveedores.html
+ipc.on('open_proveedores.html', function(event){
+    const win3 = new BrowserWindow({
+        minWidth: 700,
+        minHeight: 1000,
+        maxWidth:700,
+        maxHeight:1000,
+
+        webPreferences: {
+            nodeIntegration:true
+        }
+    })
+
+    win3.webContents.openDevTools();
+
+    win3.loadFile('proveedores.html');
+
+    win3.once("ready-to-show", () => {
+        win3.show()
+    })
+
+})
+// iniciar proveedores.html
 
 // terminar proceso cuando todas las ventanas esten cerradas
 app.on("window-all-closed", () => {

@@ -443,3 +443,25 @@ function create_update_input_for_cantidad (SPAN:string, string_or_number:string,
     });
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// mandar request a main.js para poder abrir proveedores
+
+let proveedores_btn = document.getElementById("proveedores_btn")!;
+
+proveedores_btn.addEventListener("click", function(e){
+    e.preventDefault();
+    ipc.send('open_proveedores.html');
+})
