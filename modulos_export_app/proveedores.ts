@@ -1,3 +1,4 @@
+const body = document.getElementById("body")!;
 // import conexion con la base de datos
 let database_connect_proveedores = require("D:/Users/Usuario/Documents/GIT hub/inventario_app/database_connection.js")
 
@@ -32,7 +33,7 @@ btn_create_proveedor.addEventListener("click", function(e){
 
     
     // obj
-    let obj = {
+    var obj = {
         nombre: nombre.value,
         descripcion: textarea.value,
         email: email.value,
@@ -46,6 +47,19 @@ btn_create_proveedor.addEventListener("click", function(e){
             throw error;
         }
     })
+
+    nombre.value = "";
+    textarea.value = "";
+    email.value = "";
+    telefono.value = "";
+
+    let section_proveedores = document.getElementById("proveedores_list")!;
+    section_proveedores.remove();
+
+    let new_section_proveedores = document.createElement("section");
+    body.appendChild(new_section_proveedores);
+    new_section_proveedores.id = "proveedores_list";
+    get_proveedores();
 })
 
 //  class proveedores
@@ -89,9 +103,11 @@ database_connect_proveedores.query('SELECT * FROM `proveedores`', function(error
     }
 })}
 
-let section_proveedores = document.getElementById('proveedores_list')!;
+
 
 function create_proveedores(proveedores:proveedores){
+    let section_proveedores = document.getElementById('proveedores_list')!;
+    let number_id = JSON.stringify(proveedores.Id);
 
     // create div
     let div_proveedor = document.createElement("div");
@@ -144,6 +160,36 @@ function create_proveedores(proveedores:proveedores){
     let paragraph_descripcion = document.createElement("p");
     paragraph_descripcion.innerHTML = proveedores.Descripcion!;
     div2.appendChild(paragraph_descripcion);
+
+    // create delete button
+    let btn_delete = document.createElement("button");
+    btn_delete.innerHTML = "borrar proveedor";
+    btn_delete.className = "btn btn-default";
+    btn_delete.id = JSON.stringify(proveedores.Id);
+    div2.appendChild(btn_delete);
+    btn_delete.addEventListener("click", function(e){
+        e.preventDefault();
+        database_connect_proveedores.query(`DELETE FROM proveedores WHERE id = ${number_id}`, (error:any, results:any, fields:any) => {
+            if(error){ throw error}
+        })
+
+        // remove and reload get_proveedores
+        section_proveedores.remove();
+        let new_Section = document.createElement("section");
+        new_Section.id = "proveedores_list";
+        body.appendChild(new_Section);
+        
+        get_proveedores()
+        
+    })
+
+    // create mod button
+    let btn_mod = document.createElement("button");
+    btn_mod.innerHTML = "modificar";
+    btn_mod.className = "btn btn-positive";
+    btn_mod.id = "mod_btn";
+    btn_mod.disabled = true;
+    div2.appendChild(btn_mod);
 }
 
 
