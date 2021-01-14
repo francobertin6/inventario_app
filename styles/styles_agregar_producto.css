@@ -29,6 +29,12 @@ form .form-group{
     margin-top: 25px;
     margin-bottom: 25px;
 }
+form .form-group select{
+    width: 250px;
+    min-height: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
 
 /* botones */
 

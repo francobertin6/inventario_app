@@ -138,12 +138,5 @@ function create_proveedores(proveedores) {
         body.appendChild(new_Section);
         get_proveedores();
     });
-    // create mod button
-    let btn_mod = document.createElement("button");
-    btn_mod.innerHTML = "modificar";
-    btn_mod.className = "btn btn-positive";
-    btn_mod.id = "mod_btn";
-    btn_mod.disabled = true;
-    div2.appendChild(btn_mod);
 }
 get_proveedores();

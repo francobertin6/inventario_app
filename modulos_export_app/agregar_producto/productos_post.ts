@@ -13,6 +13,26 @@ btn_cancel.addEventListener("click", function(e){
 });
 // render manda info al main para cerrar el widget
 
+
+// baja las opciones de proveedores
+function get_proveedores_post(){
+    let proveedor_input = <HTMLSelectElement> document.getElementById("proveedor");
+    connects.query('SELECT nombre FROM proveedores', function(error:any, results:any, fields:any){
+        if(error){ throw error}
+        else{
+          console.log(results.nombre)
+            for (let index = 0; index < results.length; index++) {
+                let create_option_element = <HTMLOptionElement> document.createElement("option");
+                create_option_element.innerHTML = results[index].nombre;
+                proveedor_input.appendChild(create_option_element);
+            }
+        }
+    })
+}
+
+get_proveedores_post();
+
+
 // btns agregar
 let btn_agregar = document.getElementById("agregar")!;
 
@@ -23,7 +43,7 @@ btn_agregar.addEventListener("click", function(event){
     let cantidad_input = <HTMLInputElement> document.getElementById("cantidad");
     let medida_input = <HTMLInputElement> document.getElementById("medida");
     let costo_unitario_input = <HTMLInputElement> document.getElementById("costo_unitario");
-    let proveedor_input = <HTMLInputElement> document.getElementById("proveedor");
+    let proveedor_input = <HTMLSelectElement> document.getElementById("proveedor");
 
     // obj post
     var obj = {
