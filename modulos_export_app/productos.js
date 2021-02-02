@@ -43,7 +43,6 @@ var array_nombre = [];
 var array_tipo = [];
 var array_color = [];
 var array_proveedores = [];
-// ARRAYS
 // GET function productos
 // table elemento
 const tabla = document.getElementById("tabla");
@@ -572,44 +571,64 @@ search_input.addEventListener("dblclick", function (e) {
         }
         //  div0 posibles resultados
         let array_index_of = [];
-        search_input.addEventListener("input", function () {
-            if (search_input.value.length >= 3) {
+        search_input.addEventListener("input", function (e) {
+            if (search_input.value.length >= 2 && search_input.value.length <= 6) {
                 // tag: valor que busca
                 let tag = container_tag.textContent;
                 // value: valor del momento que es mayor o igual a 3 y puede cambiar
                 let value = search_input.value;
                 switch (tag) {
                     case "nombre:":
-                        var idx = array_nombre.indexOf(value);
-                        while (idx != -1) {
-                            array_index_of.push(idx);
-                            idx = array_nombre.indexOf(value, idx + 1);
-                        }
-                        console.log(array_index_of);
+                        array_nombre.forEach((element, index) => {
+                            let elemento = array_nombre[index];
+                            let indice = element.indexOf(value);
+                            let search_elemento_repeat = array_index_of.indexOf(elemento);
+                            // problema: me muestra todos los resultados, necesito tener un solo ejemplo de cada uno
+                            console.log(search_elemento_repeat);
+                            if (value !== "" && indice !== -1 && search_elemento_repeat == -1) {
+                                array_index_of.push(elemento);
+                            }
+                            console.log(array_index_of);
+                        });
                         break;
                     case "tipo:":
-                        var idx = array_tipo.indexOf(value);
-                        while (idx != -1) {
-                            array_index_of.push(idx);
-                            idx = array_tipo.indexOf(value, idx + 1);
-                        }
-                        console.log(array_index_of);
+                        array_tipo.forEach((element, index) => {
+                            let elemento = array_tipo[index];
+                            let indice = element.indexOf(value);
+                            let search_elemento_repeat = array_index_of.indexOf(elemento);
+                            // problema: me muestra todos los resultados, necesito tener un solo ejemplo de cada uno
+                            console.log(search_elemento_repeat);
+                            if (value !== "" && indice !== -1 && search_elemento_repeat == -1) {
+                                array_index_of.push(elemento);
+                            }
+                            console.log(array_index_of);
+                        });
                         break;
                     case "color:":
-                        var idx = array_color.indexOf(value);
-                        while (idx != -1) {
-                            array_index_of.push(idx);
-                            idx = array_color.indexOf(value, idx + 1);
-                        }
-                        console.log(array_index_of);
+                        array_color.forEach((element, index) => {
+                            let elemento = array_color[index];
+                            let indice = element.indexOf(value);
+                            let search_elemento_repeat = array_index_of.indexOf(elemento);
+                            // problema: me muestra todos los resultados, necesito tener un solo ejemplo de cada uno
+                            console.log(search_elemento_repeat);
+                            if (value !== "" && indice !== -1 && search_elemento_repeat == -1) {
+                                array_index_of.push(elemento);
+                            }
+                            console.log(array_index_of);
+                        });
                         break;
                     case "proveedor:":
-                        var idx = array_proveedores.indexOf(value);
-                        while (idx != -1) {
-                            array_index_of.push(idx);
-                            idx = array_proveedores.indexOf(value, idx + 1);
-                        }
-                        console.log(array_index_of);
+                        array_proveedores.forEach((element, index) => {
+                            let elemento = array_proveedores[index];
+                            let indice = element.indexOf(value);
+                            let search_elemento_repeat = array_index_of.indexOf(elemento);
+                            // problema: me muestra todos los resultados, necesito tener un solo ejemplo de cada uno
+                            console.log(search_elemento_repeat);
+                            if (value !== "" && indice !== -1 && search_elemento_repeat == -1) {
+                                array_index_of.push(elemento);
+                            }
+                            console.log(array_index_of);
+                        });
                         break;
                 }
             }
@@ -617,6 +636,40 @@ search_input.addEventListener("dblclick", function (e) {
                 let number_length_index_of = array_index_of.length;
                 array_index_of.splice(0, number_length_index_of);
             }
+            // promesa setea resolver o rechazar segun una condicion que implementa que el indef_of_array tenga un elemento y el div0 no tenga childrens
+            var promesa_index_of_array = new Promise(function (resolve, reject) {
+                if (array_index_of.length !== 0 && div0.childElementCount === 0) {
+                    resolve("estan los terminos para empezar a fabricar el div 0");
+                }
+                else if (search_input.value.length <= 1) {
+                    reject("no dan los terminos para empezar");
+                }
+            });
+            // si la condicion se acepta corre esta funcion
+            promesa_index_of_array.then(function (response) {
+                console.log(response);
+                // titulo 
+                let paragraph = document.createElement("p");
+                paragraph.innerHTML = "sugerencias:";
+                div0.appendChild(paragraph);
+                // titulo
+                for (let index = 0; index < array_index_of.length; index++) {
+                    const element = array_index_of[index];
+                    // crea los botones de sugerencias
+                    var sug_btn = document.createElement("button");
+                    sug_btn.className = "sug_btn";
+                    sug_btn.innerHTML = element;
+                    div0.appendChild(sug_btn);
+                }
+                section_search.appendChild(div0);
+            });
+            // si no se acepta corre esta funcion
+            promesa_index_of_array.catch(function (error) {
+                console.log(error);
+                div0.childNodes.forEach(element => {
+                    div0.removeChild(element);
+                });
+            });
         });
         // crea resultados previsibles div3
         search_input.addEventListener("keypress", function (e) {
@@ -700,6 +753,30 @@ search_input.addEventListener("dblclick", function (e) {
                     producto_div.appendChild(span8);
                     // SPANS
                     div3.appendChild(producto_div);
+                    div3.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        search_input.style.width = "50vw";
+                        search_input.style.left = "3%";
+                        search_input.value = "";
+                        section_search.remove();
+                        container_tag.remove();
+                        // reload function delete and create tbody
+                        let tbody = document.getElementById('table-body');
+                        tbody.remove();
+                        // borro tbody de la tabla y vuelvo a crearlo para que la funcion pueda resetearse
+                        let body = document.createElement("tbody");
+                        body.id = 'table-body';
+                        tabla.appendChild(body);
+                        /*  delete arrays
+                        let number_delete_array = array_productos.length;
+                        array_productos.splice(0, number_delete_array);*/
+                        for (let index = 0; index < array_new_productos.length; index++) {
+                            const element = array_new_productos[index];
+                            let img = document.createElement("img");
+                            img.src = "./icons/elipsis.svg";
+                            create_table_row(element, img);
+                        }
+                    });
                 }
             }
         });
