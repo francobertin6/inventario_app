@@ -550,7 +550,7 @@ search_input.addEventListener("dblclick", function (e) {
         header === null || header === void 0 ? void 0 : header.appendChild(container_tag);
         // nuevas dimensiones de search input
         search_input.style.width = "40vw";
-        search_input.style.left = "8.7%";
+        search_input.style.left = "10%";
         // crea btns tags
         for (let index = 0; index < array_btns_search.length; index++) {
             let btn = document.createElement("button");
@@ -648,6 +648,13 @@ search_input.addEventListener("dblclick", function (e) {
             // si la condicion se acepta corre esta funcion
             promesa_index_of_array.then(function (response) {
                 console.log(response);
+                // comportamiento de div3, div 2 y div1
+                div3.style.top = "60px";
+                div3.style.position = "relative";
+                div2.style.top = "60px";
+                div2.style.position = "relative";
+                div1.style.top = "60px";
+                div1.style.position = "relative";
                 // titulo 
                 let paragraph = document.createElement("p");
                 paragraph.innerHTML = "sugerencias:";
@@ -660,11 +667,22 @@ search_input.addEventListener("dblclick", function (e) {
                     sug_btn.className = "sug_btn";
                     sug_btn.innerHTML = element;
                     div0.appendChild(sug_btn);
+                    sug_btn.onclick = sug_btn_function;
                 }
                 section_search.appendChild(div0);
             });
             // si no se acepta corre esta funcion
             promesa_index_of_array.catch(function (error) {
+                // comportamiento de div3, div 2 y div1
+                div3.style.top = "0px";
+                div3.style.position = "static";
+                div3.style.zIndex = "2";
+                div2.style.top = "0px";
+                div2.style.position = "static";
+                div2.style.zIndex = "2";
+                div1.style.top = "0px";
+                div1.style.position = "static";
+                div1.style.zIndex = "2";
                 console.log(error);
                 div0.childNodes.forEach(element => {
                     div0.removeChild(element);
@@ -767,9 +785,6 @@ search_input.addEventListener("dblclick", function (e) {
                         let body = document.createElement("tbody");
                         body.id = 'table-body';
                         tabla.appendChild(body);
-                        /*  delete arrays
-                        let number_delete_array = array_productos.length;
-                        array_productos.splice(0, number_delete_array);*/
                         for (let index = 0; index < array_new_productos.length; index++) {
                             const element = array_new_productos[index];
                             let img = document.createElement("img");
@@ -789,11 +804,15 @@ search_input.addEventListener("dblclick", function (e) {
         section_search.remove();
     }
 });
+// funcion sug_btn (botones que tienen las sugerencias de busqueda)
+function sug_btn_function(event) {
+    // utiliza el texto interior del boton y se lo pasa a la barra de busqueda
+    event.preventDefault();
+    let btn = event.target.innerHTML;
+    search_input.value = btn;
+}
 // function tags function
 function search_tag(tag, array, div) {
-    // problema: necesito crear otro array que contenga lo que busco con los tags
-    /*   2DO PROBLEMA: los tags ya tienen que estar en la barra para que la funcion se tire con enter
-                        y este el tag y el valor de search_input  */
     let value_in_input = search_input.value;
     let array_new_productos = [];
     for (let index = 0; index < array.length; index++) {

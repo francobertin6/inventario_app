@@ -41,7 +41,7 @@
 #header #container_tag{
     position: absolute;
     top: 28%;
-    left: 20px;
+    left: 37px;
     border: 1px solid;
     width: 7vw;
     height: 3.2vh;
@@ -297,3 +297,31 @@
     width: 10vw;
 }
 
+#search_bar .div0{
+    position: absolute;
+    top: 5px;
+    left: 2px;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid black;
+}
+
+#search_bar .div0 p{
+    font-family:'Anton', sans-serif;
+    font-size: 18px;
+    color: black;
+    position: relative;
+    left: 5px;
+    
+}
+
+#search_bar .div0 button{
+    background: steelblue;
+    color: white;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    position: relative;
+    top: -45px;
+    left: 100px;
+}
