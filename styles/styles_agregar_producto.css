@@ -31,7 +31,7 @@ form .form-group{
 }
 form .form-group select{
     width: 250px;
-    min-height: 25px;
+    max-height: 25px;
     margin-top: 25px;
     margin-bottom: 25px;
 }

@@ -145,6 +145,31 @@
     padding-bottom: 5px;
 }
 
+.menu_option .delete:hover{
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+.menu_option .fav:hover{
+    background-color: rgb(187, 187, 22);
+    color: white;
+}
+
+.menu_option .sell:hover{
+    background-color: rgb(3, 189, 3);
+    color: white;
+}
+
+.menu_option .waiting:hover{
+    background-color: rgb(4, 195, 243);
+    color: white;
+}
+
+.menu_option .unsold:hover{
+    background-color: rgb(182, 7, 7);
+    color: white;
+}
+
 /* update window */
 
 .update_window{

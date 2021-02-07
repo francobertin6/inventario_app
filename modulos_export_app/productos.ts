@@ -312,7 +312,7 @@ function reload_get_products(){
 
      setTimeout(function(){
         get_productos(); 
-     }, 1000);
+     }, 300);
 }
 
 reload.addEventListener("click", function(e:Event){
@@ -368,7 +368,7 @@ function option(event:any){
         setTimeout(function(){
             menu.remove();
             reload_get_products(); 
-        }, 1000);
+        }, 500);
     });
     
     // option favorite
@@ -382,7 +382,7 @@ function option(event:any){
         setTimeout(function(){
             menu.remove();
             reload_get_products(); 
-        }, 1500);
+        }, 500);
     })
 
     // option tag vendido
@@ -396,7 +396,7 @@ function option(event:any){
         setTimeout(function(){
             menu.remove();
             reload_get_products(); 
-        }, 1500);
+        }, 500);
     })
 
     // option tag en espera
@@ -410,7 +410,7 @@ function option(event:any){
         setTimeout(function(){
             menu.remove();
             reload_get_products(); 
-        }, 1500);
+        }, 500);
     })
 
     // option tag no vendido
@@ -424,7 +424,7 @@ function option(event:any){
         setTimeout(function(){
             menu.remove();
             reload_get_products(); 
-        }, 1500);
+        }, 500);
     })
 
     }else{

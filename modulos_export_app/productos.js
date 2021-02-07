@@ -228,7 +228,7 @@ function reload_get_products() {
     console.log(array_productos);
     setTimeout(function () {
         get_productos();
-    }, 1000);
+    }, 300);
 }
 reload.addEventListener("click", function (e) {
     e.preventDefault();
@@ -269,7 +269,7 @@ function option(event) {
             setTimeout(function () {
                 menu.remove();
                 reload_get_products();
-            }, 1000);
+            }, 500);
         });
         // option favorite
         let menu_fav = document.createElement("span");
@@ -282,7 +282,7 @@ function option(event) {
             setTimeout(function () {
                 menu.remove();
                 reload_get_products();
-            }, 1500);
+            }, 500);
         });
         // option tag vendido
         let menu_sell = document.createElement("span");
@@ -295,7 +295,7 @@ function option(event) {
             setTimeout(function () {
                 menu.remove();
                 reload_get_products();
-            }, 1500);
+            }, 500);
         });
         // option tag en espera
         let menu_waiting = document.createElement("span");
@@ -308,7 +308,7 @@ function option(event) {
             setTimeout(function () {
                 menu.remove();
                 reload_get_products();
-            }, 1500);
+            }, 500);
         });
         // option tag no vendido
         let menu_unsold = document.createElement("span");
@@ -321,7 +321,7 @@ function option(event) {
             setTimeout(function () {
                 menu.remove();
                 reload_get_products();
-            }, 1500);
+            }, 500);
         });
     }
     else {
